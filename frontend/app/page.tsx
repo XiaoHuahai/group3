@@ -1,6 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
+import YearRangeInput from "./components/YearRangeInput";
 
 export default function HomePage() {
+  const [fromYear, setFromYear] = useState<number | undefined>(undefined);
+  const [toYear, setToYear] = useState<number | undefined>(undefined);
+
   return (
     <section className="space-y-8">
       <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -18,19 +25,14 @@ export default function HomePage() {
           </label>
           <label className="flex flex-col gap-2 text-sm">
             <span className="font-medium text-slate-700">Year range</span>
-            <div className="flex items-center gap-2">
-              <input
-                className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-                type="number"
-                placeholder="2000"
-              />
-              <span className="text-slate-500">—</span>
-              <input
-                className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-                type="number"
-                placeholder="2025"
-              />
-            </div>
+            <YearRangeInput
+              fromYear={fromYear}
+              toYear={toYear}
+              onFromChange={setFromYear}
+              onToChange={setToYear}
+              minYear={2000}
+              maxYear={2025}
+            />
           </label>
           <button
             type="submit"

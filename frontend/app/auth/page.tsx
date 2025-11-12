@@ -1,11 +1,3 @@
-/*
- * @Author: Mendax
- * @Date: 2025-11-12 21:14:31
- * @LastEditors: Do not edit
- * @LastEditTime: 2025-11-12 23:51:21
- * @Description: 
- * @FilePath: \group3\frontend\app\auth\page.tsx
- */
 import Link from "next/link";
 
 export default function AuthPage() {
