@@ -1,3 +1,11 @@
+/*
+ * @Author: Mendax
+ * @Date: 2025-11-12 21:14:31
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2025-11-12 23:49:59
+ * @Description: 
+ * @FilePath: \group3\frontend\app\auth\page.tsx
+ */
 import Link from "next/link";
 
 export default function AuthPage() {
@@ -5,7 +13,7 @@ export default function AuthPage() {
     <section className="mx-auto max-w-xl space-y-6">
       <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
         <h2 className="text-xl font-semibold text-slate-900">登录 SPEED</h2>
-        <p className="mt-2 text-sm text-slate-600">使用已注册的邮箱登录系统，访问对应角色的仪表盘。</p>
+        <p className="mt-2 text-sm text-slate-600">使用已注册的邮箱登录系统 访问对应角色的仪表盘。</p>
         <form className="mt-6 space-y-4">
           <label className="flex flex-col gap-2 text-sm">
             <span className="font-medium text-slate-700">邮箱</span>
