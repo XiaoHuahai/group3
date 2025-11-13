@@ -33,7 +33,7 @@ export default function AuthPage() {
       </div>
 
       <div className="rounded-xl border border-dashed border-slate-300 bg-white p-6 text-sm text-slate-600">
-        Don't have an account?{" "}
+        Don&apos;t have an account?{" "}
         <Link href="/auth/register" className="font-medium text-primary hover:underline">
           Sign up here
         </Link>
