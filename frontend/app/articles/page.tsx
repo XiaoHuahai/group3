@@ -99,7 +99,7 @@ export default function ArticlesPage() {
 
       {articles.length === 0 ? (
         <div className="rounded-xl border border-slate-200 bg-white p-12 text-center">
-          <p className="text-slate-600 mb-4">You haven't submitted any articles yet</p>
+          <p className="text-slate-600 mb-4">You haven&apos;t submitted any articles yet</p>
           <Link
             href="/articles/new"
             className="inline-block rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow hover:bg-blue-600"

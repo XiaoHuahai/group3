@@ -39,6 +39,7 @@ export default function ModerationDetailPage() {
     };
 
     checkAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, router]);
 
   const loadArticle = async () => {

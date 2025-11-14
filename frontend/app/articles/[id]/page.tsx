@@ -14,10 +14,6 @@ export default function ArticleDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    loadArticle();
-  }, [id]);
-
   const loadArticle = async () => {
     try {
       setLoading(true);
@@ -30,6 +26,11 @@ export default function ArticleDetailPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    loadArticle();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   const getStatusLabel = (status?: string) => {
     const statusMap: Record<string, string> = {

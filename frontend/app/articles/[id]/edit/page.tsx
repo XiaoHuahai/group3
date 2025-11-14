@@ -25,14 +25,6 @@ export default function EditArticlePage() {
   });
   const [authorInput, setAuthorInput] = useState("");
 
-  useEffect(() => {
-    if (!auth.isAuthenticated()) {
-      router.push("/auth");
-      return;
-    }
-    loadArticle();
-  }, [id, router]);
-
   const loadArticle = async () => {
     try {
       setLoading(true);
@@ -55,6 +47,15 @@ export default function EditArticlePage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (!auth.isAuthenticated()) {
+      router.push("/auth");
+      return;
+    }
+    loadArticle();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, router]);
 
   const handleAddAuthor = () => {
     if (authorInput.trim()) {
