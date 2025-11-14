@@ -20,6 +20,8 @@ export class SearchArticlesDto {
     yearFrom;
     yearTo;
     searchTerm;
+    title;
+    author;
 }
 __decorate([
     IsOptional(),
@@ -65,4 +67,14 @@ __decorate([
     IsString(),
     __metadata("design:type", String)
 ], SearchArticlesDto.prototype, "searchTerm", void 0);
+__decorate([
+    IsOptional(),
+    IsString(),
+    __metadata("design:type", String)
+], SearchArticlesDto.prototype, "title", void 0);
+__decorate([
+    IsOptional(),
+    IsString(),
+    __metadata("design:type", String)
+], SearchArticlesDto.prototype, "author", void 0);
 //# sourceMappingURL=search-articles.dto.js.map

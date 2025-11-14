@@ -17,11 +17,11 @@ let User = class User extends Document {
     name;
 };
 __decorate([
-    Prop({ required: true, unique: true }),
+    Prop({ type: String, required: true, unique: true }),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
-    Prop({ required: true }),
+    Prop({ type: String, required: true }),
     __metadata("design:type", String)
 ], User.prototype, "passwordHash", void 0);
 __decorate([
@@ -29,7 +29,7 @@ __decorate([
     __metadata("design:type", Array)
 ], User.prototype, "roles", void 0);
 __decorate([
-    Prop(),
+    Prop({ type: String }),
     __metadata("design:type", String)
 ], User.prototype, "name", void 0);
 User = __decorate([

@@ -94,8 +94,29 @@ export class ArticlesService {
     return article;
   }
 
+  async getSearchStats() {
+    const total = await this.articleModel.countDocuments().exec();
+    const published = await this.articleModel.countDocuments({ status: ArticleStatus.Published }).exec();
+    const submitted = await this.articleModel.countDocuments({ status: ArticleStatus.Submitted }).exec();
+    const approved = await this.articleModel.countDocuments({ status: ArticleStatus.ApprovedForAnalysis }).exec();
+    const rejected = await this.articleModel.countDocuments({ status: ArticleStatus.Rejected }).exec();
+    
+    return {
+      total,
+      byStatus: {
+        Published: published,
+        Submitted: submitted,
+        ApprovedForAnalysis: approved,
+        Rejected: rejected
+      }
+    };
+  }
+
   async search(dto: SearchArticlesDto) {
-    const filter: FilterQuery<Article> = { status: ArticleStatus.Published };
+    // 搜索已审核通过或已发布的文章（审核通过后即可被搜索）
+    const filter: FilterQuery<Article> = {
+      status: { $in: [ArticleStatus.ApprovedForAnalysis, ArticleStatus.Published] }
+    };
     if (dto.practice) {
       filter['analysis.practice'] = dto.practice;
     }
@@ -120,7 +141,15 @@ export class ArticlesService {
         filter.publicationYear.$lte = dto.yearTo;
       }
     }
-    if (dto.searchTerm) {
+    // 支持独立的标题和作者搜索
+    if (dto.title) {
+      filter.title = { $regex: dto.title, $options: 'i' };
+    }
+    if (dto.author) {
+      filter.authors = { $in: [new RegExp(dto.author, 'i')] };
+    }
+    // 保留原有的 searchTerm 支持（向后兼容）
+    if (dto.searchTerm && !dto.title && !dto.author) {
       filter.$or = [
         { title: { $regex: dto.searchTerm, $options: 'i' } },
         { authors: { $in: [new RegExp(dto.searchTerm, 'i')] } },
@@ -136,6 +165,60 @@ export class ArticlesService {
 
   async findPublishedById(id: string): Promise<Article | null> {
     return this.articleModel.findOne({ _id: id, status: ArticleStatus.Published }).exec();
+  }
+
+  async findById(id: string): Promise<Article | null> {
+    return this.articleModel.findById(id).exec();
+  }
+
+  async findByIdOrPublished(id: string, userId?: string): Promise<Article | null> {
+    const article = await this.articleModel.findById(id).exec();
+    if (!article) {
+      return null;
+    }
+    // 如果文章已发布，任何人都可以查看
+    if (article.status === ArticleStatus.Published) {
+      return article;
+    }
+    // 如果文章未发布，只有提交者可以查看
+    if (userId && article.submitter.toString() === userId) {
+      return article;
+    }
+    // 其他情况返回 null
+    return null;
+  }
+
+  async update(articleId: string, userId: string, dto: CreateArticleDto): Promise<Article> {
+    const article = await this.articleModel.findById(articleId);
+    if (!article) {
+      throw new NotFoundException('Article not found');
+    }
+    // 只有提交者或管理员可以更新
+    if (article.submitter.toString() !== userId) {
+      throw new BadRequestException('You can only update your own articles');
+    }
+    // 只有已提交状态的文章可以更新
+    if (article.status !== ArticleStatus.Submitted) {
+      throw new BadRequestException('Only submitted articles can be updated');
+    }
+    Object.assign(article, dto);
+    return article.save();
+  }
+
+  async delete(articleId: string, userId: string): Promise<void> {
+    const article = await this.articleModel.findById(articleId);
+    if (!article) {
+      throw new NotFoundException('Article not found');
+    }
+    // 只有提交者或管理员可以删除
+    if (article.submitter.toString() !== userId) {
+      throw new BadRequestException('You can only delete your own articles');
+    }
+    // 只有已提交状态的文章可以删除
+    if (article.status !== ArticleStatus.Submitted) {
+      throw new BadRequestException('Only submitted articles can be deleted');
+    }
+    await this.articleModel.findByIdAndDelete(articleId);
   }
 }
 

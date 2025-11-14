@@ -8,9 +8,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Controller, Get } from '@nestjs/common';
+import { UsersService } from './users/users.service.js';
 let AppController = class AppController {
+    usersService;
+    constructor(usersService) {
+        this.usersService = usersService;
+    }
     health() {
         return { status: 'ok' };
+    }
+    async getUserStats() {
+        return this.usersService.getUserStats();
     }
 };
 __decorate([
@@ -19,8 +27,15 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "health", null);
+__decorate([
+    Get('/stats/users'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], AppController.prototype, "getUserStats", null);
 AppController = __decorate([
-    Controller()
+    Controller(),
+    __metadata("design:paramtypes", [UsersService])
 ], AppController);
 export { AppController };
 //# sourceMappingURL=app.controller.js.map

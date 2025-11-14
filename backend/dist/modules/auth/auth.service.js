@@ -28,7 +28,10 @@ let AuthService = class AuthService {
         }
         const payload = { sub: user._id, email: user.email, roles: user.roles || [] };
         const accessToken = await this.jwtService.signAsync(payload);
-        return { accessToken };
+        return {
+            accessToken,
+            user: user.toJSON()
+        };
     }
 };
 AuthService = __decorate([

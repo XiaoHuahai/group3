@@ -4,16 +4,16 @@ import { Role } from '../../../common/enums/role.enum.js';
 
 @Schema({ timestamps: true })
 export class User extends Document {
-  @Prop({ required: true, unique: true })
+  @Prop({ type: String, required: true, unique: true })
   email!: string;
 
-  @Prop({ required: true })
+  @Prop({ type: String, required: true })
   passwordHash!: string;
 
   @Prop({ type: [String], enum: Role, default: [Role.Submitter] })
   roles!: Role[];
 
-  @Prop()
+  @Prop({ type: String })
   name?: string;
 }
 

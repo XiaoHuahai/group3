@@ -8,22 +8,22 @@ import { User } from '../../users/schemas/user.schema.js';
 
 @Schema({ _id: false })
 export class ArticleAnalysis {
-  @Prop({ required: true })
+  @Prop({ type: String, required: true })
   practice!: string;
 
-  @Prop({ required: true })
+  @Prop({ type: String, required: true })
   claim!: string;
 
-  @Prop({ enum: EvidenceOutcome })
+  @Prop({ type: String, enum: EvidenceOutcome })
   outcome!: EvidenceOutcome;
 
-  @Prop({ enum: ResearchMethod })
+  @Prop({ type: String, enum: ResearchMethod })
   researchMethod?: ResearchMethod;
 
-  @Prop({ enum: ParticipantType })
+  @Prop({ type: String, enum: ParticipantType })
   participantType?: ParticipantType;
 
-  @Prop()
+  @Prop({ type: String })
   summary?: string;
 }
 
@@ -31,58 +31,58 @@ const ArticleAnalysisSchema = SchemaFactory.createForClass(ArticleAnalysis);
 
 @Schema({ timestamps: true })
 export class Article extends Document {
-  @Prop({ required: true })
+  @Prop({ type: String, required: true })
   title!: string;
 
   @Prop({ type: [String], default: [] })
   authors!: string[];
 
-  @Prop()
+  @Prop({ type: String })
   journalOrConference?: string;
 
-  @Prop()
+  @Prop({ type: Number })
   publicationYear?: number;
 
-  @Prop()
+  @Prop({ type: String })
   volume?: string;
 
-  @Prop()
+  @Prop({ type: String })
   issue?: string;
 
-  @Prop()
+  @Prop({ type: String })
   pages?: string;
 
-  @Prop()
+  @Prop({ type: String })
   doi?: string;
 
   @Prop({ type: SchemaTypes.ObjectId, ref: User.name, required: true })
   submitter!: Types.ObjectId;
 
-  @Prop({ enum: ArticleStatus, default: ArticleStatus.Submitted })
+  @Prop({ type: String, enum: ArticleStatus, default: ArticleStatus.Submitted })
   status!: ArticleStatus;
 
-  @Prop()
+  @Prop({ type: String })
   moderationNote?: string;
 
   @Prop({ type: SchemaTypes.ObjectId, ref: User.name })
   moderatedBy?: Types.ObjectId;
 
-  @Prop()
+  @Prop({ type: Date })
   moderatedAt?: Date;
 
   @Prop({ type: SchemaTypes.ObjectId, ref: User.name })
   analyst?: Types.ObjectId;
 
-  @Prop()
+  @Prop({ type: Date })
   analysisCompletedAt?: Date;
 
   @Prop({ type: ArticleAnalysisSchema })
   analysis?: ArticleAnalysis;
 
-  @Prop({ default: 0 })
+  @Prop({ type: Number, default: 0 })
   ratingCount!: number;
 
-  @Prop({ default: 0 })
+  @Prop({ type: Number, default: 0 })
   ratingTotal!: number;
 }
 

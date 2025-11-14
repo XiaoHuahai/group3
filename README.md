@@ -39,6 +39,11 @@ npm run dev:backend
 
 # 启动前端
 npm run dev:frontend
+
+# 创建超级管理员（首次使用）
+cd backend
+npm run create-admin -- <email> <password> [name]
+# 示例: npm run create-admin -- admin@example.com admin123 超级管理员
 ```
 
 后端默认监听 `http://localhost:3001`，提供 `/health`、`/auth/register`、`/auth/login` 以及文章提交/审核/搜索等接口；前端默认运行在 `http://localhost:3000`，当前页面为静态占位，后续会接入实际 API 与状态管理。

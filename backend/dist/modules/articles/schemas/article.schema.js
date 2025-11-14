@@ -23,27 +23,27 @@ let ArticleAnalysis = class ArticleAnalysis {
     summary;
 };
 __decorate([
-    Prop({ required: true }),
+    Prop({ type: String, required: true }),
     __metadata("design:type", String)
 ], ArticleAnalysis.prototype, "practice", void 0);
 __decorate([
-    Prop({ required: true }),
+    Prop({ type: String, required: true }),
     __metadata("design:type", String)
 ], ArticleAnalysis.prototype, "claim", void 0);
 __decorate([
-    Prop({ enum: EvidenceOutcome }),
+    Prop({ type: String, enum: EvidenceOutcome }),
     __metadata("design:type", String)
 ], ArticleAnalysis.prototype, "outcome", void 0);
 __decorate([
-    Prop({ enum: ResearchMethod }),
+    Prop({ type: String, enum: ResearchMethod }),
     __metadata("design:type", String)
 ], ArticleAnalysis.prototype, "researchMethod", void 0);
 __decorate([
-    Prop({ enum: ParticipantType }),
+    Prop({ type: String, enum: ParticipantType }),
     __metadata("design:type", String)
 ], ArticleAnalysis.prototype, "participantType", void 0);
 __decorate([
-    Prop(),
+    Prop({ type: String }),
     __metadata("design:type", String)
 ], ArticleAnalysis.prototype, "summary", void 0);
 ArticleAnalysis = __decorate([
@@ -72,7 +72,7 @@ let Article = class Article extends Document {
     ratingTotal;
 };
 __decorate([
-    Prop({ required: true }),
+    Prop({ type: String, required: true }),
     __metadata("design:type", String)
 ], Article.prototype, "title", void 0);
 __decorate([
@@ -80,27 +80,27 @@ __decorate([
     __metadata("design:type", Array)
 ], Article.prototype, "authors", void 0);
 __decorate([
-    Prop(),
+    Prop({ type: String }),
     __metadata("design:type", String)
 ], Article.prototype, "journalOrConference", void 0);
 __decorate([
-    Prop(),
+    Prop({ type: Number }),
     __metadata("design:type", Number)
 ], Article.prototype, "publicationYear", void 0);
 __decorate([
-    Prop(),
+    Prop({ type: String }),
     __metadata("design:type", String)
 ], Article.prototype, "volume", void 0);
 __decorate([
-    Prop(),
+    Prop({ type: String }),
     __metadata("design:type", String)
 ], Article.prototype, "issue", void 0);
 __decorate([
-    Prop(),
+    Prop({ type: String }),
     __metadata("design:type", String)
 ], Article.prototype, "pages", void 0);
 __decorate([
-    Prop(),
+    Prop({ type: String }),
     __metadata("design:type", String)
 ], Article.prototype, "doi", void 0);
 __decorate([
@@ -108,11 +108,11 @@ __decorate([
     __metadata("design:type", Types.ObjectId)
 ], Article.prototype, "submitter", void 0);
 __decorate([
-    Prop({ enum: ArticleStatus, default: ArticleStatus.Submitted }),
+    Prop({ type: String, enum: ArticleStatus, default: ArticleStatus.Submitted }),
     __metadata("design:type", String)
 ], Article.prototype, "status", void 0);
 __decorate([
-    Prop(),
+    Prop({ type: String }),
     __metadata("design:type", String)
 ], Article.prototype, "moderationNote", void 0);
 __decorate([
@@ -120,7 +120,7 @@ __decorate([
     __metadata("design:type", Types.ObjectId)
 ], Article.prototype, "moderatedBy", void 0);
 __decorate([
-    Prop(),
+    Prop({ type: Date }),
     __metadata("design:type", Date)
 ], Article.prototype, "moderatedAt", void 0);
 __decorate([
@@ -128,7 +128,7 @@ __decorate([
     __metadata("design:type", Types.ObjectId)
 ], Article.prototype, "analyst", void 0);
 __decorate([
-    Prop(),
+    Prop({ type: Date }),
     __metadata("design:type", Date)
 ], Article.prototype, "analysisCompletedAt", void 0);
 __decorate([
@@ -136,11 +136,11 @@ __decorate([
     __metadata("design:type", ArticleAnalysis)
 ], Article.prototype, "analysis", void 0);
 __decorate([
-    Prop({ default: 0 }),
+    Prop({ type: Number, default: 0 }),
     __metadata("design:type", Number)
 ], Article.prototype, "ratingCount", void 0);
 __decorate([
-    Prop({ default: 0 }),
+    Prop({ type: Number, default: 0 }),
     __metadata("design:type", Number)
 ], Article.prototype, "ratingTotal", void 0);
 Article = __decorate([

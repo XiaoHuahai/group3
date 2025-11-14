@@ -39,6 +39,14 @@ export class SearchArticlesDto {
   @IsOptional()
   @IsString()
   searchTerm?: string;
+
+  @IsOptional()
+  @IsString()
+  title?: string;
+
+  @IsOptional()
+  @IsString()
+  author?: string;
 }
 
 
